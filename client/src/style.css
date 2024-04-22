@@ -1,0 +1,171 @@
+.app {
+  display: flex;
+  justify-content: center;
+  .container{
+    width: 1024px;
+
+    .container {
+      padding: 10px 0px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      .addHome {
+        padding: 10px;
+        margin-top: 20px;
+        cursor: pointer;
+        border: none;
+        background-color: teal;
+        color: white;
+        font-weight: bold;
+      }
+  
+      .links {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        h6 {
+          font-size: 16px;
+          font-weight: 300;
+        }
+      }
+    }
+    
+    h1 {
+      margin-bottom: 50px;
+    }
+  
+    .students {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.875rem;
+      border-collapse: collapse;
+      width: 100%;
+      gap: 10px;
+
+      th {
+        border: 1px solid black;
+        text-align: left;
+        padding: 8px;
+        background-color: white;
+      }
+
+      .student {
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+  
+        td {
+          border: 1px solid black;
+          text-align: left;
+          padding: 8px;
+          background-color: white;
+        }
+
+        button {
+          padding: 3px 6px;
+          background-color: white;
+          cursor: pointer;
+        }
+        .delete {
+          border: 1px solid rgb(245, 191, 191);
+          color: rgb(242, 100, 100);
+        }
+        .update {
+          border: 1px solid rgb(204, 204, 243);
+          color: rgb(139, 139, 234);
+        }
+      }
+    }
+
+    .dormitories {
+      gap: 10px;
+
+      .dormitory {
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+  
+        button {
+          padding: 3px 6px;
+          background-color: white;
+          cursor: pointer;
+        }
+        .delete {
+          border: 1px solid rgb(245, 191, 191);
+          color: rgb(242, 100, 100);
+        }
+        .update {
+          border: 1px solid rgb(204, 204, 243);
+          color: rgb(139, 139, 234);
+        }
+      }
+    }
+
+    .settlements {
+      gap: 10px;
+
+      .settlement {
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+  
+        button {
+          padding: 3px 6px;
+          background-color: white;
+          cursor: pointer;
+        }
+        .delete {
+          border: 1px solid rgb(245, 191, 191);
+          color: rgb(242, 100, 100);
+        }
+        .update {
+          border: 1px solid rgb(204, 204, 243);
+          color: rgb(139, 139, 234);
+        }
+      }
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  
+      input {
+        width: 250px;
+        padding: 10px;
+        border: 1px solid gray;
+      }
+  
+      textarea {
+        padding: 10px;
+      }
+  
+      button {
+        border: none;
+        padding: 10px;
+        background-color: white;
+        background-color: teal;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+    
+    .navbar {
+      .container {
+        padding: 10px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .logo {
+          img {
+            width: 120px;
+          }
+        }
+      }
+    }
+  }
+}
