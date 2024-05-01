@@ -15,10 +15,6 @@ const Students = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -28,10 +24,6 @@ const Students = () => {
     setPage(0);
   };
 
-  const rows = [
-    { id: student.id, namelat: student.namelat, namekir: student.namekir, studytype: student.studytype, country: student.country, sex: student.sex },
-  ];
-  
   useEffect(() => {
     const fetchAllStudents = async () => {
       try {
@@ -63,18 +55,24 @@ const Students = () => {
             Add new student
           </Link>
         </button>
-        <div className="links">
-          <Link className="link" to="/dormitories">
-            <h6>Dormitories</h6>
+        <button className="dormitory">
+          <Link to="/dormitories" style={{ color: "inherit", textDecoration: "none" }}>
+            Dormitories
           </Link>
-        </div>
-        <div className="links">
-          <Link className="link" to="/settlements">
-            <h6>Settlements</h6>
+        </button>
+        <button className="settlement">
+          <Link to="/settlements" style={{ color: "inherit", textDecoration: "none" }}>
+            Settlements
           </Link>
-        </div>
+        </button>
+        <button className="user">
+          <Link to="/users" style={{ color: "inherit", textDecoration: "none" }}>
+            Users
+          </Link>
+        </button>
       </div>
-       <table className="students">
+      <Root>
+       <table aria-label="custom pagination table">
         <thead>
          <tr>
           <th>id</th>
@@ -86,25 +84,22 @@ const Students = () => {
          </tr>
         </thead>
         <tbody>
-        {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-        ).map((student) => (
-            <tr key={student.id} className="student">
+        {students && students.map((student) => (
+            <tr key={student.id}>
               <td>{student.id}</td>
-              <td style={{ width: 160 }} align="right">
+              <td>
                 {student.namelat}
               </td>
-              <td style={{ width: 160 }} align="right">
+              <td>
                 {student.namekir}
               </td>
-              <td style={{ width: 160 }} align="right">
+              <td>
                 {student.studytype}
               </td>
-              <td style={{ width: 160 }} align="right">
+              <td>
                 {student.country}
               </td>
-              <td style={{ width: 160 }} align="right">
+              <td>
                 {student.sex}
               </td>
               <td>
@@ -120,23 +115,18 @@ const Students = () => {
               </td>
             </tr>
           ))}
-          {emptyRows > 0 && (
-            <tr style={{ height: 41 * emptyRows }}>
-              <td colSpan={3} aria-hidden />
-            </tr>
-          )}
         </tbody>
         <tfoot>
           <tr>
             <CustomTablePagination
               rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
               colSpan={3}
-              count={rows.length}
+              count={13}
               rowsPerPage={rowsPerPage}
               page={page}
               slotProps={{
                 select: {
-                  'aria-label': 'rows per page',
+                  'aria-label': 'Rows per page',
                 },
                 actions: {
                   showFirstButton: true,
@@ -149,11 +139,13 @@ const Students = () => {
           </tr>
         </tfoot>
        </table>
+       </Root>
     </div>
   );
 };
 
 export default Students;
+
 
 const grey = {
   50: '#F3F6F9',
@@ -167,6 +159,28 @@ const grey = {
   800: '#303740',
   900: '#1C2025',
 };
+
+const Root = styled('div')(
+  ({ theme }) => `
+  table {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.875rem;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td,
+  th {
+    border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[200]};
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
+  }
+  `,
+);
 
 const CustomTablePagination = styled(TablePagination)`
   & .${classes.toolbar} {
@@ -195,7 +209,6 @@ const CustomTablePagination = styled(TablePagination)`
 
   & .${classes.spacer} {
     display: none;
-  }
   }
 
   & .${classes.actions} {
