@@ -32,6 +32,17 @@ app.get("/students", (req, res) => {
     });
   });
 
+app.get("/dormitories", (req, res) => {
+    const q = "SELECT * FROM dormitories";
+    db.query(q, (err, data) => {
+      if (err) {
+        console.log(err);
+        return res.json(err);
+      }
+      return res.json(data);
+    });
+  });
+
 app.get("/settlements", (req, res) => {
     const q = "SELECT * FROM settlements";
     db.query(q, (err, data) => {
@@ -59,6 +70,19 @@ app.post("/students", (req,res)=>{
     });
 });
 
+app.post("/dormitories", (req,res)=>{
+  const q = "INSERT INTO dormitories (`dormitory`,`room`) VALUES (?)"
+  const values = [
+      req.body.dormitory,
+      req.body.room,
+  ];
+
+  db.query(q, [values], (err, data) => {
+      if (err) return res.send(err);
+      return res.json(data);
+  });
+});
+
 app.post("/settlements", (req,res)=>{
   const q = "INSERT INTO settlements (`building`,`address`) VALUES (?)"
   const values = [
@@ -77,6 +101,16 @@ app.delete("/students/:id", (req, res) => {
     const q = " DELETE FROM students WHERE id = ? ";
   
     db.query(q, [studentId], (err, data) => {
+      if (err) return res.send(err);
+      return res.json(data);
+    });
+  });
+
+app.delete("/dormitories/:id", (req, res) => {
+    const dormitoryId = req.params.id;
+    const q = " DELETE FROM dormitories WHERE id = ? ";
+  
+    db.query(q, [dormitoryId], (err, data) => {
       if (err) return res.send(err);
       return res.json(data);
     });
@@ -108,6 +142,21 @@ app.put("/students/:id", (req, res) => {
       if (err) return res.send(err);
       return res.json(data);
     });
+});
+
+app.put("/dormitories/:id", (req, res) => {
+  const dormitoryId = req.params.id;
+  const q = "UPDATE dormitories SET `dormitory`= ?, `room`= ? WHERE id = ?";
+
+  const values = [
+    req.body.dormitory,
+    req.body.room,
+  ];
+
+  db.query(q, [...values,dormitoryId], (err, data) => {
+    if (err) return res.send(err);
+    return res.json(data);
+  });
 });
 
 app.put("/settlements/:id", (req, res) => {
