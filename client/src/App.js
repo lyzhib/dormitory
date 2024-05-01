@@ -6,11 +6,14 @@ import {
 } from "react-router-dom";
 import Add from "./pages/Add";
 import Add1 from "./pages/Add1";
+import Add2 from "./pages/Add2";
 import Students from "./pages/Students";
 import Settlements from "./pages/Settlements";
 import Dormitories from "./pages/Dormitories";
 import Update from "./pages/Update";
 import Update1 from "./pages/Update1";
+import Update2 from "./pages/Update2";
+import Users from "./pages/Users";
 import Navbar from "./components/Navbar";
 import "./style.css";
 
@@ -40,6 +43,10 @@ const router = createBrowserRouter([
         path: "/settlements",
         element: <Settlements />,
       },
+      {
+        path: "/users",
+        element: <Users />,
+      },
     ],
   },
   {
@@ -57,6 +64,14 @@ const router = createBrowserRouter([
   {
     path: "/update1/:id",
     element: <Update1 />,
+  },
+  {
+    path: "/add2",
+    element: <Add2 />,
+  },
+  {
+    path: "/update2/:id",
+    element: <Update2 />,
   },
 ]);
 
